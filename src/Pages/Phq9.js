@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function Phq9() {
   const questions = [
@@ -13,48 +14,39 @@ export default function Phq9() {
     'Question 9: Thoughts that you would be better off dead, or of hurting yourself in some way'
   ];
 
-  const [answers, setAnswers] = React.useState(new Array(questions.length * 4).fill(null));
+
+
+  const navigate = useNavigate();
+  let sum = 0;
+  let questions_count = 0;
 
   const handleAnswerChange = (questionIndex, optionIndex, value) => {
-    const optionCount = 4;
-    const index = questionIndex * optionCount + optionIndex;
-    const newAnswers = [...answers];
-    newAnswers[index] = value;
-    setAnswers(newAnswers);
+    if (value === "Not at all") {
+      sum += 0;
+    } else if (value === "Several Days") {
+      sum += 1;
+    } else if (value === "More than half the days") {
+      sum += 2;
+    } else if (value === "Nearly every day") {
+      sum += 3;
+    }
+    questions_count +=questionIndex
+    if(questions_count===36){
+      // Call the api here
+    }
+    console.log(questions_count);
+
+    // console.log(sum);
   };
+
+
+
+
 
   return (
     <>
 
-      {/* <div className="max-w-md mx-auto mt-8 p-4 bg-gray-100 rounded-md shadow-md">
-        <form>
-          <h1 className="ml-36 mb-5 text-2xl font-mono font-bold">Phq 9 test</h1>
-          <h1 className="text-1xl mb-3 font-mono">This is to test your progress please answer sincerely</h1>
-          {questions.map((question, questionIndex) => (
-            <div key={questionIndex} className="mb-4">
-              <p className="mb-2 text-1xl">{question}</p>
-              <div className="flex items-center">
-                {[1, 2, 3, 4].map((optionIndex) => (
-                  <React.Fragment key={optionIndex}>
-                    <input
-                      type="radio"
-                      id={`answer-${questionIndex + 1}-${optionIndex}`}
-                      name={`answer-${questionIndex + 1}`}
-                      value={optionIndex}
-                      checked={answers[questionIndex * 4 + optionIndex - 1] === optionIndex}
-                      onChange={() => handleAnswerChange(questionIndex, optionIndex - 1, optionIndex)}
-                      className="mr-2"
-                    />
-                    <label htmlFor={`answer-${questionIndex + 1}-${optionIndex}`} className="mr-4">
-                      {`Option ${optionIndex}`}
-                    </label>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          ))}
-        </form>
-      </div> */}
+     
 <section className="bg-gray-50">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-[25rem]">
     <h1 className="pl-5 text-4xl mt-10 font-semibold font-poppins mb-10">Healix</h1>
@@ -88,7 +80,7 @@ export default function Phq9() {
               name={`${question}`}
               value={optionIndex}
               // checked={answers[questionIndex * 4 + optionIndex - 1] === optionIndex}
-              // onChange={() => handleAnswerChange(questionIndex, optionIndex - 1, optionIndex)}
+              onChange={() => handleAnswerChange(questionIndex, optionIndex, option)}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5"
               required
             />
@@ -104,7 +96,8 @@ export default function Phq9() {
     </div>
   ))}
   <button
-    type="submit"
+    type="button"
+    onClick={() => navigate("/Dashboard")}
     className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
   >
     Submit

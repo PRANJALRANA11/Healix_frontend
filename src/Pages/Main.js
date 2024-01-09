@@ -187,7 +187,10 @@ export default function Main() {
 
 
   useEffect(() => {
+    const Auth_set =async()=>{
+    await Authenticated();
     const storedUser = setUser(localStorage.getItem('user'));
+    console.log(storedUser);
     const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
 
     if (storedUser && storedIsAuthenticated) {
@@ -195,7 +198,8 @@ export default function Main() {
       console.log(JSON.parse(storedUser));
       console.log(JSON.parse(storedIsAuthenticated));
     }
-
+  }
+  Auth_set();
     const newSocket = new WebSocket('wss://text-to-speech-uajn.onrender.com/text');
     newSocket.addEventListener('open', (event) => {
       console.log('WebSocket connection opened:', event);
@@ -224,14 +228,14 @@ export default function Main() {
       // Store user and isAuthenticated in local storage
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
-
       console.log(user.given_name);
+      return;
     } else {
       console.log("not authenticated");
     }
   };
 
-  Authenticated();
+
 
   const sendMessage = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
