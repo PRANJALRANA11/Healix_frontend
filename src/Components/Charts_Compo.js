@@ -12,11 +12,11 @@ export default function Charts_Compo() {
     series: [
       {
         name: 'score',
-        data: [1, 4, 5, 9, 10, 14, 15, 19, 20, 27]
+        data: [10,12,8,15,14]
       }
     ],
     xaxis: {
-      categories: [1,2,3,4,5,6,7,8,9,10]
+      categories: [1,2,3,4,5]
     },
     stroke: {
       curve: 'smooth',
@@ -104,7 +104,7 @@ export default function Charts_Compo() {
         <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">12 Thurs 2023</h5>
+      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">14 Jan 2023</h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">Your Last Session</p>
     </div>
   </div>
@@ -113,7 +113,7 @@ export default function Charts_Compo() {
         <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32.4 hrs</h5>
+      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">15 mins</h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">attended</p>
     </div>
   </div>
@@ -122,7 +122,7 @@ export default function Charts_Compo() {
         <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">10</h5>
+      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">1</h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">sessions attended</p>
     </div>
   </div>
@@ -135,15 +135,12 @@ export default function Charts_Compo() {
       <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">27</h5>
+      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">14</h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">Last Score</p>
     </div>
     <div
       class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-      12%
-      <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-      </svg>
+      Moderate Depression
     </div>
   </div>
   </div>
@@ -154,15 +151,8 @@ export default function Charts_Compo() {
       <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32 %</h5>
+      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">24.9 %</h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">Depression Detected</p>
-    </div>
-    <div
-      class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-      12%
-      <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-      </svg>
     </div>
   </div>
   </div>

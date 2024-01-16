@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 
 
-
-
 export default function Main() {
   const [transcribed_audio, set_transcribed_audio] = useState("");
   const [socket, setSocket] = useState(null);
@@ -19,9 +17,14 @@ export default function Main() {
   const [speech_text, set_speech_text] = useState("");
   const [microphone_state, set_microphone_state] = useState(false);
   const [User, setUser] = useState({});
+  const [end_time, set_session_end_time] = useState(new Date());
+  const [start_time, set_session_start_time] = useState(new Date());
+  const [session_count, set_session_count] = useState(0);
 
 
   const navigate = useNavigate();
+
+  const user_session_count = User.given_name + session_count;
 
 
   const microphone = () => {
@@ -48,8 +51,8 @@ export default function Main() {
     };
   
     const data = {
-      // "text": messageFromServer,
-      "text": "Hello there my name is pranjal and i am 5 ",
+      "text": messageFromServer,
+      // "text": "Hello there my name is pranjal and i am 5 ",
       "model_id": "eleven_monolingual_v1",
       "voice_settings": {
         "stability": 0.5,
@@ -122,7 +125,7 @@ export default function Main() {
   
     const data = {
       // "text": messageFromServer,
-      "text": `Hello ${User.given_name} How are you today please feel free to talk to me about anything you want to talk about lets start the session`,
+      "text": `Hello Pranjal, How are you today please feel free to talk to me about anything you want to talk about lets start the session`,
       "model_id": "eleven_monolingual_v1",
       "voice_settings": {
         "stability": 0.5,
@@ -168,12 +171,12 @@ export default function Main() {
           SpeechRecognition.startListening();
         });
 
+
         
          if(session_state === true){
           audioElement.play();
           set_speech_text(messageFromServer);
          }
-
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -182,8 +185,6 @@ export default function Main() {
     fetchData();
    
   }, [session_state]); 
-  
-  
 
 
   useEffect(() => {
@@ -271,8 +272,8 @@ export default function Main() {
       <div className='pl-20 text-4xl mt-10 font-semibold font-poppins'>
         Healix
       </div>
-      <div id="JarvisHood" className='ml-[30%]'>
-        <div className="square">
+      <div id="JarvisHood" className='ml-[33%] mt-10'>
+        <button onClick={microphone } className="square">
           <span className={` ${listening ?'listen_animation1':'talk_animation1'}`}></span>
           <span className={` ${listening ?'listen_animation2':'talk_animation3'}`}></span>
           <span className={` ${listening ?'listen_animation3':'talk_animation3'}`}></span>
@@ -290,18 +291,26 @@ export default function Main() {
       .start();
   }}
 />
-        </div>
+        </button>
       </div>
       <div>
       <Chat messageFromServer={speech_text} transcript={transcript}/>
-      <div className=' fixed top-[40rem] left-[30rem]'>
-      <button type="button" class="text-white w-[15rem] mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 " onClick={() => set_session_state(true)}>{session_state? 'Session Started':'Start Session'}</button>
-      {microphone_state?<i class="fa-solid fa-2xl fa-microphone-slash" onClick={microphone }> </i>: <i class="fa-solid fa-microphone fa-2xl" onClick={microphone} ></i>
-     }
-     
-      <button type="button" class="ml-5 text-white w-[15rem] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"   onClick={() => navigate("/questionairre")}>Stop Session</button>
-    </div>
-      {/* <button type="button" onClick={SpeechRecognition.stopListening}>stop</button> */}
+      <div className='ml-[25rem]'>
+      </div>
+      <div className=' fixed top-[33rem] right-0'>
+        { session_state?
+        <button type="button" class=" text-white w-[20rem] mr-5 bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"   onClick={() => {navigate("/questionairre"); set_session_end_time(new Date());}}>Stop Session</button>
+           :
+        <button type="button" class="text-white w-[20rem] mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 " onClick={() => {set_session_state(true); set_session_start_time(new Date());  set_session_count(session_count+1);}}>{session_state? 'Session Started':'Start Session'}</button>
+       }
+      </div>
+     <div>
+     </div>
+
+     <div className=' fixed top-[40rem] left-[45rem] hover:cursor-pointer'>
+     {/* {microphone_state?<i class="fa-solid fa-2xl fa-microphone-slash" onClick={microphone }> </i>: <i class="fa-solid fa-microphone fa-2xl" onClick={microphone} ></i>
+     } */}
+     </div>
       
       
       </div>

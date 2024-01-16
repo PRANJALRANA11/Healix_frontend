@@ -33,6 +33,7 @@ export default function Phq9() {
     questions_count +=questionIndex
     if(questions_count===36){
       // Call the api here
+      console.log(sum);
     }
     console.log(questions_count);
 
@@ -44,24 +45,22 @@ export default function Phq9() {
 
 
   return (
-    <>
-
-     
-<section className="bg-gray-50">
-  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-[25rem]">
+    <>     
+<section className="">
+  <div className="flex  flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-[25rem]">
     <h1 className="pl-5 text-4xl mt-10 font-semibold font-poppins mb-10">Healix</h1>
-    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
-      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <div className=" bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md">
+      <div className="p-6  space-y-4 md:space-y-6 sm:p-8">
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Phq9 Test
         </h1>
         <p className="text-sm font-light text-gray-900">
           These questions help us track your progress.
         </p>
-
-
-
-
+        <p className="text-sm font-light text-gray-900">
+                Over the last 2 weeks, how often have you been
+                bothered by any of the following problems?
+        </p>
 <form className="space-y-4 md:space-y-6" action="#">
   {questions.map((question, questionIndex) => (
     <div key={questionIndex} className="mb-4">

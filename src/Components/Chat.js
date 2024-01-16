@@ -4,8 +4,8 @@ import Typewriter from 'typewriter-effect';
 export default function Chat({messageFromServer,transcript}) {
   return (
     <>
-    <div className='fixed right-5 top-[10rem]'>
-    <div class="w-[30vw] max-w-sm bg-[#2d2c2c] border text-white border-gray-200 p-10 pt-[2rem] rounded-[3rem] shadow h-[auto] overflow-hidden">
+    <div className='fixed  left-5 top-[10rem]'>
+    <div class="w-[30vw] max-w-sm bg-white  border-gray-200  text-black  p-10 pt-[2rem] rounded-[3rem] shadow h-[auto] overflow-hidden">
       <p className='font-[2em] animation-spin'>
         
         <Typewriter
@@ -19,8 +19,8 @@ export default function Chat({messageFromServer,transcript}) {
       </p>
     </div>
   </div>
-  <div class="fixed left-5 top-[10rem] w-80">
-  <div class="scroll-container scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-lg scrollbar-track-gray-100" style={{"overflowY":"auto","maxHeight":"75vh"}}>
+  <div class="fixed   right-5 top-[10rem] w-80">
+  <div class="scroll-container scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-lg scrollbar-track-gray-100" style={{"overflowY":"auto","maxHeight":"45vh"}}>
     <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 card">
       <h5 class="card-title mb-2 text-2xl font-bold tracking-tight text-gray-900">Guidelines for Optimal Therapy Experience with Healix</h5>
       <p class=" font-normal text-gray-700  mb-4">

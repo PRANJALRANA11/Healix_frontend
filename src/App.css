@@ -38,8 +38,8 @@
 }
 .square{
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 450px;
+  height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,6 +189,8 @@
   }
 
 }
+
+
 #chart {
   max-width: 650px;
   margin: 35px auto;

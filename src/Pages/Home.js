@@ -2,6 +2,8 @@ import React from 'react'
 import {useKindeAuth} from "@kinde-oss/kinde-auth-react";
 import { motion } from "framer-motion";
 import {TypeAnimation} from 'react-type-animation';
+import Slider from '../Components/Slider';
+import Services from '../Components/Services';
 
 export default function Home() {
     const { login, register } = useKindeAuth();
@@ -36,9 +38,10 @@ export default function Home() {
     />
         
         </motion.h1>
-        
+        <Slider/>
+       
       </div>
-      <div className="w-[40%] h-screen bg-black">
+      <div className="w-[40%] fixed right-0 h-screen bg-black">
         <h1 className='text-white text-5xl font-bold mt-52 ml-44'>Get Started</h1>
         <button className='bg-[#3c46ff] w-60 ml-16 mt-20 mr-10 h-12 rounded-full text-white hover:bg-[#4950d4] ' onClick={register} type="button">Register</button>
         <button className='bg-[#3c46ff] w-60 h-12 mt-20 rounded-full text-white hover:bg-[#4950d4] ' onClick={login} type="button">Log In</button>
@@ -47,6 +50,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    <Services/>
     </div>
   )
 }
