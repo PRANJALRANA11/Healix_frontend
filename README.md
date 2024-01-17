@@ -22,7 +22,7 @@ git clone https://github.com/PRANJALRANA11/Healix
 ```
 6. Run the server
 ```bash
-    unicorn app.main:app --reload
+    uvicorn app.main:app --reload
 ```
 7. Open the client
 ```bash
