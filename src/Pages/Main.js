@@ -47,7 +47,7 @@ export default function Main() {
     const headers = {
       "Accept": "audio/mpeg",
       "Content-Type": "application/json",
-      "xi-api-key": "67873c93109a35f5990006df001c9119"
+      "xi-api-key": "dab7ef883b5cec33d6eb5428c8b0bcef"
     };
   
     const data = {
@@ -120,7 +120,7 @@ export default function Main() {
     const headers = {
       "Accept": "audio/mpeg",
       "Content-Type": "application/json",
-      "xi-api-key": "67873c93109a35f5990006df001c9119"
+      "xi-api-key": "dab7ef883b5cec33d6eb5428c8b0bcef"
     };
   
     const data = {
