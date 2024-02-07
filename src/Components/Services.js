@@ -28,10 +28,10 @@ export default function Services() {
         <img width="48" height="48" src="https://img.icons8.com/fluency/48/person-male.png" alt="person-male"/>
           </div>
           <div class="flex items-center mb-5">
-            <h2 class="text-white text-2xl ml-4">Personalised Therapy</h2>
+            <h2 class="text-white text-2xl ml-10">Personalised Bot</h2>
           </div>
           <div class="flex-grow">
-            <p class="leading-relaxed text-base text-white text-center">Get therapy based on your health the therapy that best suits you</p>
+            <p class="leading-relaxed text-base text-white text-center">Talk to a more personalised bot</p>
           </div>
         </div>
       </div>

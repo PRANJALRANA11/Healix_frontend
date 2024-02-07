@@ -1,181 +1,133 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import Active from './Active';
+import Emotion from './Emotion';
+import Engagement from './Engagement';
+import Excercises from './Excercises';
+
 
 export default function Charts_Compo() {
+  const[res,setres]=useState("")
+  const[res_met,set_met_res]=useState({})
+  const[date,set_date]=useState("")
+
 
   const navigate = useNavigate();
-  const options_area = {
-    chart: {
-      type: 'area'
-    },
-    series: [
-      {
-        name: 'score',
-        data: [10,12,8,15,14]
+  useEffect(() => {
+    const getName = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`https://text-to-speech-uajn.onrender.com/v1/cup/users/${token}`);
+        setres(response.data.name)
+        console.log(response.data); // Assuming the metrics are in the response data
+      } catch (error) {
+        console.error('Error fetching metrics:', error);
       }
-    ],
-    xaxis: {
-      categories: [1,2,3,4,5]
-    },
-    stroke: {
-      curve: 'smooth',
-      colors: ['#1A56DB'], // Line color
-      width: 4, // Line width
-      dashArray: [0, 8], // Dash array for dashed lines
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.3,
-        stops: [0, 100]
+    }
+    getName();
+  }, []);
+  
+
+ 
+  useEffect(() => {
+    const getMetrics = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`https://text-to-speech-uajn.onrender.com/v1/cup/metrix/${token}`);
+        // set_met_res(response)
+        set_met_res(response.data)
+        console.log(response.data); // Assuming the metrics are in the response data
+      } catch (error) {
+        console.error('Error fetching metrics:', error);
       }
-    },
-  };
-  const options_pie = {
-    chart: {
-      type: 'pie',
-    },
-    labels: ['Depression Detected', 'Anxiety Detected', 'Stress Detected', 'Nothing Detected'],
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
-  };
+    }
 
-  const series_pie = [44, 55, 13, 43, 22];
+    getMetrics();
+  }, []);
 
-  const options_prog = {
-    chart: {
-      type: 'radialBar',
-      offsetY: -20,
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: '70%',
-        },
-        dataLabels: {
-          show: true,
-          name: {
-            fontSize: '16px',
-            offsetY: -10,
-          },
-          value: {
-            fontSize: '14px',
-            offsetY: 5,
-          },
-        },
-      },
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'dark',
-        type: 'horizontal',
-        shadeIntensity: 0.5,
-        gradientToColors: ['#ABE5A1'],
-        inverseColors: true,
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100],
-      },
-    },
-    labels: ['Progress'],
-  };
-
-  const series_prog = [70]; // Progress value (percentage)
+  useEffect(() => {
+    if (res_met.list_of_duration_of_each_session && res_met.list_of_duration_of_each_session.length > 0) {
+      const lastSession = res_met.list_of_duration_of_each_session[res_met.list_of_duration_of_each_session.length - 1];
+      const lastSessionStartTime = lastSession.start_time;
+      const dateTimeString = lastSessionStartTime;
+      const dateTime = new Date(dateTimeString);
+      const dateOnly = dateTime.toISOString().split('T')[0];
+      set_date(dateOnly);
+    }
+  }, [res_met]);
 
 
   return (
+    <>
     <div  className=''>
-        <div className='flex ml-40'>
-        <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
+        <div className='flex ml-40 text-center'>
+        <div class="max-w-sm w-full h-[15rem] bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">14 Jan 2023</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Your Last Session</p>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{date}</h1>
+    <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Your Last Talk with us</p>
     </div>
   </div>
-  <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button>
+  {/* <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button> */}
   </div>
-        <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
+        <div class="max-w-sm w-full h-[15rem] bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">15 mins</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">attended</p>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{res_met.total_time_user_in_session} Seconds</h1>
+    <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Total Time you engage</p>
     </div>
   </div>
-  <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button>
+  {/* <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button> */}
   </div>
-        <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
+        <div class="max-w-sm w-full h-[15rem] bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5 mr-4">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">1</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">sessions attended</p>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{res_met.total_session_attended} Total Talks</h1>
+    <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Till Now</p>
     </div>
   </div>
-  <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button>
+  {/* <button type="button" onClick={()=>navigate('/main')} class="text-white w-40 ml-40 mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Start New Session</button> */}
   </div>
+        
   </div>
-        <div className='w-[60vw] mt-10 ml-72 p-10 bg-white rounded-lg shadow'>
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1 mb-5">Phq9 Analysis</h5>
-      <ReactApexChart options={options_area} series={options_area.series} type="area" height={350}  />
-      <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5">
-  <div class="flex justify-between">
-    <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">14</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Last Score</p>
+  <h1 class="mb-4 ml-10 mt-20 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Metrics</span> Only For You.</h1>
+  <div>
+    
+  <Active/>
+  <Emotion/>
+  <Engagement/>
+  </div>
+  <h1 class="mb-4 ml-10 mt-20 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Mindfullness</span> Only For You.</h1>
+  <Excercises/>
+         </div>
+         <div className='mt-40'>
+        <img src="Ms.png" className='ml-10 w-60 h-auto'/>
+      <footer class="text-[black] body-font">
+  <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+    <a class="flex title-font font-medium items-center md:justify-start justify-center text-[black]">
+      <span class="ml-3 text-xl">Healix</span>
+    </a>
+    <p class="text-sm text-[black] sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-600 sm:py-2 sm:mt-0 mt-4">© 2024 Healix —
+      <a href="https://twitter.com/knyttneve" class="text-[black] ml-1" rel="noopener noreferrer" target="_blank">@Healix</a>
+    </p>
+    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+      <a href='https://twitter.com/Heal_ix' class="ml-3 text-[black]">
+        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+        </svg>
+      </a>
+      <a href='https://www.linkedin.com/company/healix1' class="ml-3 text-[black]">
+        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+          <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+          <circle cx="4" cy="4" r="2" stroke="none"></circle>
+        </svg>
+      </a>
+    </span>
+  </div>
+</footer>
     </div>
-    <div
-      class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-      Moderate Depression
-    </div>
-  </div>
-  </div>
-      </div>
-      <div  className='w-[60vw] mt-10 ml-72 p-10 bg-white rounded-lg shadow'>
-      <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1 mb-5">Conversational Analysis</h5>
-      <ReactApexChart options={options_pie} series={series_pie} type="pie" height={350} />
-      <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5">
-  <div class="flex justify-between">
-    <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">24.9 %</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Depression Detected</p>
-    </div>
-  </div>
-  </div>
-      </div>
-      <div  className='w-[60vw] mt-10 ml-72 p-10 bg-white rounded-lg shadow'>
-      <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1 mb-5">Overall Progress</h5>
-      <ReactApexChart options={options_prog} series={series_prog} type="radialBar" height={350} />
-      <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mt-5">
-  <div class="flex justify-between">
-    <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">70 %</h5>
-      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Progress this week</p>
-    </div>
-    <div
-      class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-      12%
-      <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-      </svg>
-    </div>
-  </div>
-  </div>
-      </div>
-    </div>
+     </>
   );
 }
