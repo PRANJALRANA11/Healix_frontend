@@ -50,7 +50,7 @@ const handleChange = (e) => {
 }
 
 const DID_API={
-  "key": "d29saWo2MTI2MkBldnZnby5jb20:UCOlrw4H4PrFdQEAwYe4x",
+  "key": "YmVtb2NhMzAzM0BhbGlicnMuY29t:RUbm-hGjLWYA7Sv9RCox8",
   "url": "https://api.d-id.com"
 }
 
@@ -350,7 +350,7 @@ function setVideoElement(stream) {
 
 function playIdleVideo() {
   talkVideo.srcObject = undefined;
-  talkVideo.src = 'Idle.mp4';
+  talkVideo.src = 'https://imgaccess.blob.core.windows.net/image/idle.mp4';
   talkVideo.loop = true;
 }
 
@@ -417,7 +417,7 @@ const startTherapy = async () => {
     <div id="content">
       <div id="video-wrapper">
         <div>
-          <video id="talk-video" width="400" height="400" autoPlay loop  src='Idle.mp4'></video>
+          <video id="talk-video" width="400" height="400" autoPlay loop  src='https://imgaccess.blob.core.windows.net/image/idle.mp4'></video>
         </div>
       </div>
       <br />

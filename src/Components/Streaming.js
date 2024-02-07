@@ -49,7 +49,7 @@ const handleChange = (e) => {
 }
 
 const DID_API={
-  "key":process.env.REACT_APP_DID_API_KEY,
+  "key":"YmVtb2NhMzAzM0BhbGlicnMuY29t:RUbm-hGjLWYA7Sv9RCox8",
   "url": "https://api.d-id.com"
 }
 
@@ -349,7 +349,7 @@ function setVideoElement(stream) {
 
 function playIdleVideo() {
   talkVideo.srcObject = undefined;
-  talkVideo.src = 'IdleWoman.mp4';
+  talkVideo.src = 'https://imgaccess.blob.core.windows.net/image/idleWoman.mp4';
   talkVideo.loop = true;
 }
 
@@ -417,7 +417,7 @@ function closePC(pc = peerConnection) {
     <div id="content">
       <div id="video-wrapper">
         <div>
-          <video id="talk-video" width="400" height="400" autoPlay loop   src='IdleWoman.mp4'></video>
+          <video id="talk-video" width="400" height="400" autoPlay loop   src='https://imgaccess.blob.core.windows.net/image/idleWoman.mp4'></video>
           {/* <video id="talk-video" width="400" height="400" autoPlay loop class="css-2g4t5i e3rlp0e0"  src='IdleWoman.mp4'></video> */}
         </div>
       </div>
