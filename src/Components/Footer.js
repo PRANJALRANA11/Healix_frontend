@@ -3,10 +3,10 @@ import React from 'react'
 export default function Footer() {
   return (
     <div className='mt-40'>
-        <img src="Ms.png" className='ml-10 w-60 h-auto'/>
+        <img src="Ms.png" className='ml-10 w-60 h-auto' alt='1'/>
       <footer class="text-white body-font">
   <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-    <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+    <a class="flex title-font font-medium items-center md:justify-start justify-center text-white" href='/'>
       <span class="ml-3 text-xl">Healix</span>
     </a>
     <p class="text-sm text-white sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2024 Healix —

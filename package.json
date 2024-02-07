@@ -28,6 +28,8 @@
 
     "axios": "^1.6.7",
 
+    "dotenv": "^16.4.1",
+
     "elevenlabs-node": "^2.0.1",
 
     "ffmpeg": "^0.0.4",

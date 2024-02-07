@@ -1,5 +1,5 @@
 import React from 'react'
-import Mind_Compo from './Mind_Compo';
+import MindCompo from './Mind_Compo';
 
 export default function Exer_A() {
     const time = new Date();
@@ -8,7 +8,7 @@ export default function Exer_A() {
     const expiryTimestamp = time;
   return (
     <div>
-      <Mind_Compo expiryTimestamp={expiryTimestamp} url={url}/>
+      <MindCompo expiryTimestamp={expiryTimestamp} url={url}/>
     </div>
   )
 }

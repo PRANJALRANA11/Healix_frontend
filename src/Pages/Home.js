@@ -1,9 +1,7 @@
-import React,{useState,useEffect} from 'react'
-import {useKindeAuth} from "@kinde-oss/kinde-auth-react";
+import React from 'react'
 import { motion } from "framer-motion";
 import {TypeAnimation} from 'react-type-animation';
 import Services from '../Components/Services';
-import Web3 from 'web3';
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -45,7 +43,7 @@ export default function Home() {
         <h1 className='text-white text-5xl font-bold mt-52 ml-44'>Get Started</h1>
         <button onClick={()=>navigate("/login")}  className='bg-[#3c46ff] w-3/4 ml-20 mt-20 mr-10 h-12 rounded-full text-white hover:bg-[#4950d4] '  type="button">Connect</button>
         <div>
-          <img src='Healix.png' className='w-40 h-40 ml-60 mt-20'  />
+          <img src='Healix.png' className='w-40 h-40 ml-60 mt-20'  alt='/'/>
         </div>
       </div>
     </div>

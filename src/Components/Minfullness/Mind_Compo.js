@@ -5,7 +5,6 @@ import axios from "axios"
 
 export default function Mind_Compo({expiryTimestamp,url}) {
     const [timer,setTimer] = useState(false);
-    const[res,setres]=("")
     // const [isPlaying, setIsPlaying] = useState(false);
     console.log(url)
     const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function Mind_Compo({expiryTimestamp,url}) {
         try {
           const token = localStorage.getItem('token');
           const response = await axios.get(`https://text-to-speech-uajn.onrender.com/v1/cup/users/${token}`);
-          setres(response.data.name)
           console.log(response.data); // Assuming the metrics are in the response data
         } catch (error) {
           console.error('Error fetching metrics:', error);
@@ -27,16 +25,10 @@ export default function Mind_Compo({expiryTimestamp,url}) {
       getName();
     }, []);
     const {
-        totalSeconds,
         seconds,
         minutes,
-        hours,
-        days,
-        isRunning,
         start,
         pause,
-        resume,
-        restart,
       } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
 
       const toggleAudio = () => {

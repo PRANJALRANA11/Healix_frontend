@@ -21,7 +21,7 @@ export default function Chat_qa({messageFromServer,transcript}) {
   </div>
   <div class="fixed   right-5 top-[10rem] w-80">
   <div class="scroll-container scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-lg scrollbar-track-gray-100" style={{"overflowY":"auto","maxHeight":"45vh"}}>
-    <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 card">
+    <a href="/" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 card">
       <h5 class="card-title mb-2 text-2xl font-bold tracking-tight text-gray-900">Hy friend, Lime here</h5>
       <p class=" font-normal text-gray-700  mb-4">
       Welcome to Healix! Please ensure you wear your headphones and sit in a quiet place for a pleasant experience.

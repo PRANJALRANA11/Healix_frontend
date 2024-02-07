@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import Chat from '../Components/Chat';
-import Typewriter from 'typewriter-effect';
-import { useNavigate } from "react-router-dom";
 import Streaming from '../Components/Streaming';
-import Streaming_qa from '../Components/Streaming_qa';
-import Slider from 'react-slick';
+import Streamingqa from '../Components/Streaming_qa';
 
 
 
@@ -31,7 +26,7 @@ export default function Main() {
   
 
 
-  const navigate = useNavigate();
+
 
   // const user_session_count = User.given_name + session_count;
 
@@ -226,7 +221,6 @@ export default function Main() {
   const {
     transcript,
     listening,
-    resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
@@ -269,7 +263,7 @@ export default function Main() {
       .start();
   }}
 /> */}
-{stream ? <Streaming_qa msg={msg}/> :<Streaming msg={msg}/>}
+{stream ? <Streamingqa msg={msg}/> :<Streaming msg={msg}/>}
 
 
 {/* <Streaming_qa msg={msg}/> */}

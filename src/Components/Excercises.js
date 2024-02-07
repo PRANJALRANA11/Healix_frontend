@@ -1,11 +1,9 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 export default function Excercises() {
-    const navigate = useNavigate();
   return (
     <div className='grid grid-cols-3 ml-10 mt-20'>
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-10 ">
-    <a href="#">
+    <a href="/">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">5-Minute Breathing Meditation</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 ">This practice can help reduce stress, anxiety, and negative emotions, cool yourself down when your temper flares, and sharpen your concentration skills.</p>
@@ -17,7 +15,7 @@ export default function Excercises() {
     </a>
 </div>
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-10 ">
-    <a href="#">
+    <a href="/">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">3-Minute Body Scan Meditation</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 ">A brief mindfulness meditation practice to relax your body and focus your mind.</p>
@@ -29,7 +27,7 @@ export default function Excercises() {
     </a>
 </div>
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
-    <a href="#">
+    <a href="/">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">A Guided Meditation for Sleep</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 ">A 20-minute bedtime practice to help you stay settled and less caught up in your thoughts, as you fall asleep.</p>
@@ -41,7 +39,7 @@ export default function Excercises() {
     </a>
 </div>
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
-    <a href="#">
+    <a href="/">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">A 20-Minute Meditation for Working with Anxiety</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 ">This meditation combines breath awareness, the body scan, and mindfulness of thoughts to explore sources of stress and anxiety.</p>
@@ -53,7 +51,7 @@ export default function Excercises() {
     </a>
 </div>
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
-    <a href="#">
+    <a href="/">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
 Loving-Kindness Heartscape Meditation</h5>
     </a>

@@ -1,6 +1,4 @@
 import React,{useEffect,useState} from 'react';
-import ReactApexChart from 'react-apexcharts';
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Active from './Active';
 import Emotion from './Emotion';
@@ -9,18 +7,15 @@ import Excercises from './Excercises';
 
 
 export default function Charts_Compo() {
-  const[res,setres]=useState("")
+  // const[res,setres]=useState("")
   const[res_met,set_met_res]=useState({})
   const[date,set_date]=useState("")
 
-
-  const navigate = useNavigate();
   useEffect(() => {
     const getName = async () => {
       try {
         const token = localStorage.getItem('token');
         const response = await axios.get(`https://text-to-speech-uajn.onrender.com/v1/cup/users/${token}`);
-        setres(response.data.name)
         console.log(response.data); // Assuming the metrics are in the response data
       } catch (error) {
         console.error('Error fetching metrics:', error);
@@ -103,10 +98,10 @@ export default function Charts_Compo() {
   <Excercises/>
          </div>
          <div className='mt-40'>
-        <img src="Ms.png" className='ml-10 w-60 h-auto'/>
+        <img src="Ms.png" className='ml-10 w-60 h-auto' alt='1'/>
       <footer class="text-[black] body-font">
   <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-    <a class="flex title-font font-medium items-center md:justify-start justify-center text-[black]">
+    <a class="flex title-font font-medium items-center md:justify-start justify-center text-[black]" href='/'>
       <span class="ml-3 text-xl">Healix</span>
     </a>
     <p class="text-sm text-[black] sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-600 sm:py-2 sm:mt-0 mt-4">© 2024 Healix —

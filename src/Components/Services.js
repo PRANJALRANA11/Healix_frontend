@@ -12,7 +12,7 @@ export default function Services() {
       <div class="p-4 md:w-1/3">
         <div class="flex rounded-lg h-full   flex-col">
           <div className='bg-white w-10 h-10 ml-24 mb-5 rounded-3xl'>
-            <img src="https://img.icons8.com/fluency/48/000000/brain.png"/>
+            <img src="https://img.icons8.com/fluency/48/000000/brain.png" alt='2'/>
           </div>
           <div class="flex items-center mb-5">
             <h2 class="text-white text-2xl ml-16">Mentalysis</h2>
