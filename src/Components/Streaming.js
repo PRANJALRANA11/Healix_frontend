@@ -8,14 +8,18 @@ import axios from 'axios';
 
 
 export default function Streaming_qa({msg}) {
+     
 
 const [message, setMessage] = useState(msg)
 const [session_state, set_session_state] = useState(false);
 const [sid,setSid] = useState("")
 const [ses,set_ses] = useState("")
+const [end_time, set_session_end_time] = useState(new Date());
+const [start_time, set_session_start_time] = useState(new Date());
 const [microphone_state, set_microphone_state] = useState(false);
 const [session_count, set_session_count] = useState(0);
 const [server_res,setServerRes] = useState("")
+const [stream_coming,setStreamComing] = useState(false)
 const [backendSession,setbackendSession] = useState("")
 
 
@@ -49,11 +53,11 @@ const handleChange = (e) => {
 }
 
 const DID_API={
-  "key":"YmVtb2NhMzAzM0BhbGlicnMuY29t:RUbm-hGjLWYA7Sv9RCox8",
+  "key": "dml5YW0xNDM5NUBldnZnby5jb20:t54rJ1jdCZ-D0DppQPysf",
   "url": "https://api.d-id.com"
 }
+let OPENAI_API_KEY="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";
 
-console.log("DiD",process.env.REACT_APP_DID_API_KEY)
 
 // OpenAI API endpoint set up new 10/23 
 async function fetchOpenAIResponse(userMessage) {
@@ -128,7 +132,7 @@ const connectButton = async () => {
     return;
   }
 
-   await fetch(`${DID_API.url}/talks/streams/${streamId}/sdp`,
+  const sdpResponse = await fetch(`${DID_API.url}/talks/streams/${streamId}/sdp`,
     {
       method: 'POST',
       headers: {Authorization: `Basic ${DID_API.key}`, 'Content-Type': 'application/json'},
@@ -152,7 +156,7 @@ const talkButton = async () => {
 
   console.log("OpenAI Response:", responseFromOpenAI);
 
-  await fetch(`${DID_API.url}/talks/streams/${sid}`, {
+  const talkResponse = await fetch(`${DID_API.url}/talks/streams/${sid}`, {
     method: 'POST',
     headers: { 
       Authorization: `Basic ${DID_API.key}`, 
@@ -183,7 +187,9 @@ const talkButton = async () => {
         result_format: 'mp4'
       },
       'driver_url': 'bank://lively/',
+      'config': {
         'stitch': true,
+      },
       'session_id': ses
     })
   });
@@ -290,7 +296,7 @@ function onTrack(event) {
     const stats = await peerConnection.getStats(event.track);
     stats.forEach((report) => {
       if (report.type === 'inbound-rtp' && report.mediaType === 'video') {
-        const videoStatusChanged = videoIsPlaying !== (report.bytesReceived > lastBytesReceived);
+        const videoStatusChanged = videoIsPlaying !== report.bytesReceived > lastBytesReceived;
         if (videoStatusChanged) {
           videoIsPlaying = report.bytesReceived > lastBytesReceived;
           onVideoStatusChange(videoIsPlaying, event.streams[0]);
@@ -349,7 +355,7 @@ function setVideoElement(stream) {
 
 function playIdleVideo() {
   talkVideo.srcObject = undefined;
-  talkVideo.src = 'https://imgaccess.blob.core.windows.net/image/idleWoman.mp4';
+  talkVideo.src = 'IdleWoman.mp4';
   talkVideo.loop = true;
 }
 
@@ -382,25 +388,25 @@ function closePC(pc = peerConnection) {
   }
 }
 
-// const maxRetryCount = 3;
-// const maxDelaySec = 4;
-// // Default of 1 moved to 5
-// async function fetchWithRetries(url, options, retries = 3) {
-//   try {
-//     return await fetch(url, options);
-//   } catch (err) {
-//     if (retries <= maxRetryCount) {
-//       const delay = Math.min(Math.pow(2, retries) / 4 + Math.random(), maxDelaySec) * 1000;
+const maxRetryCount = 3;
+const maxDelaySec = 4;
+// Default of 1 moved to 5
+async function fetchWithRetries(url, options, retries = 3) {
+  try {
+    return await fetch(url, options);
+  } catch (err) {
+    if (retries <= maxRetryCount) {
+      const delay = Math.min(Math.pow(2, retries) / 4 + Math.random(), maxDelaySec) * 1000;
 
-//       await new Promise((resolve) => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
 
-//       console.log(`Request failed, retrying ${retries}/${maxRetryCount}. Error ${err}`);
-//       return fetchWithRetries(url, options, retries + 1);
-//     } else {
-//       throw new Error(`Max retries exceeded. error: ${err}`);
-//     }
-//   }
-// }
+      console.log(`Request failed, retrying ${retries}/${maxRetryCount}. Error ${err}`);
+      return fetchWithRetries(url, options, retries + 1);
+    } else {
+      throw new Error(`Max retries exceeded. error: ${err}`);
+    }
+  }
+}
   const startTherapy = async () => {
     let token = localStorage.getItem('token');
     console.log(token)
@@ -417,7 +423,7 @@ function closePC(pc = peerConnection) {
     <div id="content">
       <div id="video-wrapper">
         <div>
-          <video id="talk-video" width="400" height="400" autoPlay loop   src='https://imgaccess.blob.core.windows.net/image/idleWoman.mp4'></video>
+          <video id="talk-video" width="400" height="400" autoPlay loop   src='IdleWoman.mp4'></video>
           {/* <video id="talk-video" width="400" height="400" autoPlay loop class="css-2g4t5i e3rlp0e0"  src='IdleWoman.mp4'></video> */}
         </div>
       </div>
@@ -428,7 +434,7 @@ function closePC(pc = peerConnection) {
         {/* <button  id="talk-button" onClick={talkButton} type="button">Start</button> */}
         <div className=' fixed top-[33rem] right-0'>
         { session_state?
-        <button type="button" class=" text-white w-[20rem] mr-5 bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"   onClick={() => {navigate("/dashboard");}}>Let's End</button>
+        <button type="button" class=" text-white w-[20rem] mr-5 bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"   onClick={() => {navigate("/dashboard"); set_session_end_time(new Date());}}>Let's End</button>
            :
         <button type="button" id="connect-button" class="text-white w-[20rem] mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 " onClick={() => {set_session_state(true); startTherapy(); set_session_count(session_count+1); connectButton()}}>{session_state? 'Started':'Start Talking'}</button>
        }
