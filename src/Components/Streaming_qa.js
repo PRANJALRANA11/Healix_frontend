@@ -50,7 +50,7 @@ const handleChange = (e) => {
 }
 
 const DID_API={
-  "key": "YmVtb2NhMzAzM0BhbGlicnMuY29t:RUbm-hGjLWYA7Sv9RCox8",
+  "key": "aG9saW0xODcxMEBma2NvZC5jb20:cJ0a8n08Z159CW5G2oXwy",
   "url": "https://api.d-id.com"
 }
 
